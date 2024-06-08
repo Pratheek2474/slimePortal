@@ -35,6 +35,7 @@ session_start();
         }
 
         if(empty($rollErr) && empty($passErr)){
+            
             $_SESSION['roll']=$roll;
             if($user[0]['usertype'] == 'admin'){
                 header('Location: ad_index.php');
