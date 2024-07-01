@@ -35,7 +35,6 @@ session_start();
         }
 
         if(empty($rollErr) && empty($passErr)){
-            
             $_SESSION['roll']=$roll;
             if($user[0]['usertype'] == 'admin'){
                 header('Location: ad_index.php');
@@ -72,7 +71,7 @@ session_start();
     <section class="container mt-5 pt-5">
         <div class="row">
             <div class="col m-auto p-auto">
-                <img src="images/slime-logo-vector.png" alt="logo" class="w-50">
+                <img src="images/hello.png" alt="logo" class="w-50">
             </div>
             <div class="col m-auto p-auto">
                 <h2 class="mx-3 my-3 p-auto">Login</h2>
@@ -104,6 +103,6 @@ session_start();
                 <p class="text-5 my-3 text-secondary">To create a new student profile, contact your slime portal administrator</p>
             </div>
         </div>
-    </section:>
+    </section>
 </body>
 </html>

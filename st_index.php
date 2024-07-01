@@ -1,13 +1,14 @@
 <?php include 'headers.php'; ?>
 
 
+
 <div class="container">
             <div class="row m-4 p-5 border border-dark border-1 rounded-5 border-opacity-25 object-fit-none">
                 <h2 class="text-center text-dark p-3">News & Happenings</h2>
                 <div id="news" class="carousel slide" >
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="images/1.jpg" class="d-block w-100" alt="...">
+                            <img src="images/5.jpg" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
                             <img src="images/2.jpg" class="d-block w-100" alt="...">
@@ -27,7 +28,7 @@
                     </div>
             </div>
             <div class="row m-4 p-5 overflow-y: scroll position: absolute">
-                <div class="card">
+                <div class="card scroll">
                     <h2 class="m-2 p-2 text-center card-title">Notices</h2>
                     <div class="card-body m-3 p-3">
                         <div class="card m-3 p-3">

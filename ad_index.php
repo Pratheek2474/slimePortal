@@ -1,10 +1,13 @@
 <?php 
+include 'database/database.php';
 session_start();
 
-if(!isset($_SESSION['roll'])){
-    header('Location: login.php');    
+$sql1 = "SELECT usertype FROM users WHERE roll='{$_SESSION['roll']}'";
+$result = mysqli_query($conn,$sql1);
+$type = mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['usertype'];
+if(!isset($_SESSION['roll']) || $type != 'admin'){
+  header('Location: login.php');    
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -17,25 +20,25 @@ if(!isset($_SESSION['roll'])){
     <title>Admin Index</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg sticky-top border-bottom border-dark border-2 rounded-bottom-5" style="font-weight: 400; font-size:25px; font-family:Arial, Helvetica, sans-serif; background-color:#1D2951">
+<nav class="navbar navbar-expand-lg sticky-top border-bottom border-dark border-2 rounded-bottom-5" style="font-size:21px; font-family:Arial, Helvetica, sans-serif; background-color:black">
     <div class="container-fluid">
-        <a class="navbar-brand ms-auto" href="st_index.php"><img src="images/slime-logo-vector.png" width="150" height="75"></a>
+        <a class="navbar-brand ms-auto" href="ad_index.php"><img src="images/hello.png" width="150" height="75"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto mt-3 mb-lg-0">
+        <ul class="navbar-nav mt-0 mb-lg-0">
             <li class="nav-item ms-4">
-            <a class="nav-link active" aria-current="page" href="ad_index.php" style="color:aliceblue">HOME</a>
+            <a class="nav-link active" aria-current="page" href="ad_index.php" style="color:aliceblue">Home</a>
             </li>
             <li class="nav-item ms-4">
-            <a class="nav-link" href="addstd.php" aria-current="page" style="color:aliceblue">REGISTER STUDENT</a>
+            <a class="nav-link" href="addstd.php" aria-current="page" style="color:aliceblue">Register Student</a>
             </li>
             <li class="nav-item ms-4">
-            <a class="nav-link" href="viewstd.php" style="color:aliceblue">VIEW STUDENTS</a>
+            <a class="nav-link" href="view_students.php" style="color:aliceblue">View Students</a>
             </li>
         </ul>
-        <a class="d-flex ms-auto btn btn-success" href="logout.php">
+        <a class="d-flex ms-auto mx-5 btn btn-success" href="logout.php">
             Logout
         </a>
         </div>
