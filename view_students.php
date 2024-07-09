@@ -11,14 +11,23 @@ if(!isset($_SESSION['roll']) || $type != 'admin'){
 $sql = "SELECT * FROM info";
 $results = mysqli_query($conn, $sql);
 $students = mysqli_fetch_all($results, MYSQLI_ASSOC);
+$sql2 = "SELECT * FROM results";
+$result1 = mysqli_query($conn, $sql2);
+$rslt = mysqli_fetch_all($result1, MYSQLI_ASSOC);
 
-
+if (isset($_POST['add_result'])) {
+    $roll_to_add_result = $_POST['roll_to_add_result'];
+    header('Location: add_results.php?roll=' . $roll_to_add_result);
+    exit();
+}
 if (isset($_POST['remove'])) {
     $roll_to_remove = $_POST['roll_to_remove'];
     $sql = "DELETE FROM info WHERE roll='{$roll_to_remove}'";
     $sql1 = "DELETE FROM users WHERE roll='{$roll_to_remove}'";
+    $sql3 = "DELETE FROM results WHERE roll='{$roll_to_remove}'";
     mysqli_query($conn, $sql);
     mysqli_query($conn, $sql1);
+    mysqli_query($conn, $sql3);
     header('Location: view_students.php');
     exit();
 }
@@ -76,11 +85,16 @@ if (isset($_POST['remove'])) {
                                             <th scope="col" style="width: 200px;">Roll Number</th>
                                             <th scope="col" style="width: 400px;">Name</th>
                                             <th scope="col" style="width: 100px;">View Student</th>
+                                            <th scope="col" style="width: 100px;">View Result</th>
+                                            <th scope="col" style="width: 100px;">Add Result</th>
                                             <th scope="col" style="width: 100px;">Remove Student</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach($students as $student): ?>
+                                        <?php for($i=0, $count=count($students);$i<$count;$i++):
+                                            $student = $students[$i];$rlt = $rslt[$i];
+                                            
+                                             ?>
                                             <tr>
                                                 <td><?php echo $student['roll']; ?></td>
                                                 <td><?php echo $student['fname']." ".$student['lname']; ?></td>
@@ -140,11 +154,59 @@ if (isset($_POST['remove'])) {
                                                         </div>
                                                     </div>
                                                 </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="<?php echo "#"."viewRlt"."{$rlt['roll']}"?>">Viesw</button>
+                                                    <div class="modal fade" id="<?php echo "viewRlt"."{$rlt['roll']}"?>" tabindex="-1" aria-labelledby="viewLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                            <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5" id="viewLabel">Student Results</h1>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="card">
+                                                                            <div class="card-body p-5" style="font-weight: 600; text-align:left; font-size:20px;">
+                                                                                <div class="row">
+                                                                                    <div class="col">M1: </div>
+                                                                                    <div class="col text-4 text-danger"><?php echo $rlt['M1']; ?></div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col">ED: </div>
+                                                                                    <div class="col text-4 text-danger"><?php echo $rlt['ED']; ?></div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col">AP: </div>
+                                                                                    <div class="col text-4 text-danger"><?php echo $rlt['AP']; ?></div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col">BEE: </div>
+                                                                                    <div class="col text-4 text-danger"><?php echo $rlt['BEE']; ?></div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col">PSCP: </div>
+                                                                                    <div class="col text-4 text-danger"><?php echo $rlt['PSCP']; ?></div>
+                                                                                </div>
+                                                                                </div>
+                                                                                </div>
+                                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                
+                                            <td>
+                                            <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                                                    <input type="hidden" name="roll_to_add_result" value="<?php echo $rlt['roll']; ?>">
+                                                    <input type="submit" name="add_result" class="btn btn-danger" value="ADD">
+                                                </form>
+                                            </td>
+
                                                 <td><form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                                                <input type="hidden" name="roll_to_remove" value="<?php echo $student['roll']; ?>">    
+                                                <input type="hidden" name="roll_to_remove" value="<?php echo $student['roll']; ?>"> 
                                                 <input type="submit" name="remove" class="btn btn-danger" value="Remove"></form></td>
                                             </tr>
-                                        <?php endforeach; ?>
+                                        <?php endfor; ?>
                                     </tbody>
                                 </table>
                             <?php endif; ?>
