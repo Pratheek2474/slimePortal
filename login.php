@@ -28,7 +28,7 @@ session_start();
                 $rollErr = 'Invalid Roll number';
             }
             else{
-               if($user[0]['pass'] != $pass){
+               if(!password_verify($pass,$user[0]['pass'])){
                    $passErr = 'Invalid Password';
                }
             }
@@ -71,7 +71,7 @@ session_start();
     <section class="container mt-5 pt-5">
         <div class="row">
             <div class="col m-auto p-auto">
-                <img src="images/hello.png" alt="logo" class="w-50">
+                <img src="images/slime-logo-vector.png" alt="logo" class="w-50">
             </div>
             <div class="col m-auto p-auto">
                 <h2 class="mx-3 my-3 p-auto">Login</h2>

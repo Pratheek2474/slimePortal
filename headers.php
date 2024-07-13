@@ -17,6 +17,7 @@ if(!isset($_SESSION['roll']) || $type != 'student'){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Student</title>
 </head>
 
@@ -36,16 +37,16 @@ if(!isset($_SESSION['roll']) || $type != 'student'){
             <a class="nav-link" href="profile.php" aria-current="page" style="color:aliceblue">Profile</a>
             </li>
             <li class="nav-item ms-4">
-            <a class="nav-link" href="view_students.php" style="color:aliceblue">Fee Payment</a>
+            <a class="nav-link" href="payments.php" style="color:aliceblue">Fee Payment</a>
             </li>
             <li class="nav-item ms-4">
-            <a class="nav-link" href="view_students.php" style="color:aliceblue">Hostel</a>
-            </li>
-            <li class="nav-item ms-4">
-            <a class="nav-link" href="view_students.php" style="color:aliceblue">Results</a>
+            <a class="nav-link" href="std_result.php" style="color:aliceblue">Results</a>
             </li>
         </ul>
-        <a class="d-flex ms-auto mx-5 btn btn-success" href="logout.php">
+        <a class="d-flex ms-auto btn btn-primary btn-sm" href="chp.php" style="font-size:15px; font-weight:600px; color:white">
+            Change Password
+        </a>
+        <a class="mx-5 btn btn-success" href="logout.php">
             Logout
         </a>
         </div>

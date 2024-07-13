@@ -20,13 +20,18 @@ if(isset($_POST['submit'])){
     $dept = filter_input(INPUT_POST,'dept',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $caste = filter_input(INPUT_POST,'caste',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $contact = filter_input(INPUT_POST,'contact',FILTER_SANITIZE_NUMBER_INT);
-    $pass = filter_input(INPUT_POST,'pass',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $pass = password_hash(filter_input(INPUT_POST,'pass',FILTER_SANITIZE_FULL_SPECIAL_CHARS),PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO info (fname, lname, roll, email, dob, gender, dept, caste, contact, pass) VALUES ('$fname', '$lname', '$roll', '$email', '$dob', '$gender', '$dept', '$caste', '$contact', '$pass')";
+    $sql = "INSERT INTO info (fname, lname, roll, email, dob, gender, dept, caste, contact) VALUES ('$fname', '$lname', '$roll', '$email', '$dob', '$gender', '$dept', '$caste', '$contact')";
     $sql1 = "INSERT INTO users (roll, pass) VALUES ('$roll', '$pass')";
+    $sql2 = "INSERT INTO results(roll) VALUES('$roll')";
+    $sql3 = "INSERT INTO fee(roll) VALUES('$roll')";
+
     mysqli_query($conn, $sql);
+    mysqli_query($conn, $sql3);
     mysqli_query($conn, $sql1);
-    header('Location: addstd.php');
+    mysqli_query($conn, $sql2);
+    header('Location: success_reg.php');
 }
 ?>
 <html>
@@ -78,11 +83,11 @@ if(isset($_POST['submit'])){
     
   <div class="col-md-4">
     <label for="fname" class="form-label">First name</label>
-    <input type="text" class="form-control" name="fname" value="Mark" required>
+    <input type="text" class="form-control" name="fname"  required>
   </div>
   <div class="col-md-4">
     <label for="lname" class="form-label">Last name</label>
-    <input type="text" class="form-control" name="lname" value="Otto" required>
+    <input type="text" class="form-control" name="lname"  required>
   </div>
   <div class="col-md-3">
     <label for="roll" class="form-label">Permanent Roll No.</label>

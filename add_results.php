@@ -11,6 +11,16 @@ if (isset($_GET['roll'])) {
 }
 
 if (isset($_POST['submit'])) {
+
+    $array = array(
+        "S"=>10,
+        "A"=>9,
+        "B"=>8,
+        "C"=>7,
+        "D"=>6,
+        "P"=>5,
+        "F"=>0
+    );
     // Sanitize inputs
     $M1 = filter_input(INPUT_POST, 'M1', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $ED = filter_input(INPUT_POST, 'ED', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -18,8 +28,10 @@ if (isset($_POST['submit'])) {
     $BEE = filter_input(INPUT_POST, 'BEE', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $PSCP = filter_input(INPUT_POST, 'PSCP', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
+    $tot = $array[$M1]+$array[$ED]+$array[$AP]+$array[$BEE]+$array[$PSCP];
+    $tot/=5;
     // Prepare the SQL statement
-    $sql = "UPDATE results SET M1 = '$M1', ED = '$ED', AP = '$AP', BEE = '$BEE', PSCP = '$PSCP' WHERE roll = '$roll'";
+    $sql = "UPDATE results SET M1 = '$M1', ED = '$ED', AP = '$AP', BEE = '$BEE', PSCP = '$PSCP', cgpa = '$tot' WHERE roll = '$roll'";
 
     // Execute the query
     if (mysqli_query($conn, $sql)) {

@@ -25,9 +25,11 @@ if (isset($_POST['remove'])) {
     $sql = "DELETE FROM info WHERE roll='{$roll_to_remove}'";
     $sql1 = "DELETE FROM users WHERE roll='{$roll_to_remove}'";
     $sql3 = "DELETE FROM results WHERE roll='{$roll_to_remove}'";
+    $sql4 = "DELETE FROM fee WHERE roll='{$roll_to_remove}'";
     mysqli_query($conn, $sql);
     mysqli_query($conn, $sql1);
     mysqli_query($conn, $sql3);
+    mysqli_query($conn, $sql4);
     header('Location: view_students.php');
     exit();
 }
@@ -155,7 +157,7 @@ if (isset($_POST['remove'])) {
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="<?php echo "#"."viewRlt"."{$rlt['roll']}"?>">Viesw</button>
+                                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="<?php echo "#"."viewRlt"."{$rlt['roll']}"?>">View</button>
                                                     <div class="modal fade" id="<?php echo "viewRlt"."{$rlt['roll']}"?>" tabindex="-1" aria-labelledby="viewLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-lg">
                                                             <div class="modal-content">
@@ -186,6 +188,10 @@ if (isset($_POST['remove'])) {
                                                                                 <div class="row">
                                                                                     <div class="col">PSCP: </div>
                                                                                     <div class="col text-4 text-danger"><?php echo $rlt['PSCP']; ?></div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col">CGPA: </div>
+                                                                                    <div class="col text-4 text-danger"><?php echo $rlt['cgpa']; ?></div>
                                                                                 </div>
                                                                                 </div>
                                                                                 </div>

@@ -13,7 +13,7 @@
     $info_std = mysqli_fetch_all($sql_info_res,MYSQLI_ASSOC)[0];
     $full_name_std = $info_std['fname'] . ' ' . $info_std['lname'];
     $transaction_amt = $_GET['amount'] / 100;
-    $sql_store_command = "INSERT INTO transactions (roll,full_name,amount,payment_id) VALUES ('{$_SESSION["roll"]}','{$full_name_std}','{$transaction_amt}','{$_GET["payment_id"]}')";
+    $sql_store_command = "INSERT INTO transactions (roll,full_name,amount,payment_id,timestamp) VALUES ('{$_SESSION["roll"]}','{$full_name_std}','{$transaction_amt}','{$_GET["payment_id"]}','{$_GET["timestamp"]}')";
     $sql_store_result = mysqli_query($conn,$sql_store_command);
 ?>
 
